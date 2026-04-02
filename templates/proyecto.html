@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proyecto</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="container mt-5">
+    <h2>Proyecto Form</h2>
+    <ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" data-toggle="tab" href="#involucrados">Involucrados</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#logros">Logros</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#roles">Roles</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#riesgos">Riesgos</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#costos">Costos</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#reuniones">Reuniones</a>
+        </li>
+    </ul>
+
+    <div class="tab-content">
+        <div id="involucrados" class="container tab-pane active"><br>
+            <h3>Involucrados</h3>
+            <form id="involucrados-form">
+                <div class="form-group">
+                    <label for="nombre">Nombre:</label>
+                    <input type="text" class="form-control" id="nombre" required>
+                </div>
+                <div id="error-nombre" class="text-danger" style="display: none;"></div>
+                <button type="submit" class="btn btn-primary">Agregar</button>
+            </form>
+            <table class="table mt-3">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="involucrados-table">
+                </tbody>
+            </table>
+        </div>
+        <div id="logros" class="container tab-pane fade"><br>
+            <h3>Logros</h3>
+            <!-- Similar structure as Involucrados -->
+        </div>
+        <div id="roles" class="container tab-pane fade"><br>
+            <h3>Roles</h3>
+            <!-- Similar structure as Involucrados -->
+        </div>
+        <div id="riesgos" class="container tab-pane fade"><br>
+            <h3>Riesgos</h3>
+            <!-- Similar structure as Involucrados -->
+        </div>
+        <div id="costos" class="container tab-pane fade"><br>
+            <h3>Costos</h3>
+            <!-- Similar structure as Involucrados -->
+        </div>
+        <div id="reuniones" class="container tab-pane fade"><br>
+            <h3>Reuniones</h3>
+            <!-- Similar structure as Involucrados -->
+        </div>
+    </div>
+</div>
+
+<script>
+$(document).ready(function() {
+    // Dynamic forms management and validation logic goes here
+    $('#involucrados-form').on('submit', function(event) {
+        event.preventDefault();
+        const nombre = $('#nombre').val().trim();
+        if (!nombre) {
+            $('#error-nombre').text('Este campo es obligatorio.').show();
+        } else {
+            $('#error-nombre').hide();
+            // Code to add to the table dynamically
+            const row = `<tr><td>${nombre}</td><td><button class='btn btn-danger btn-sm'>Eliminar</button></td></tr>`;
+            $('#involucrados-table').append(row);
+            $('#nombre').val(''); // Clear input
+        }
+    });
+});
+</script>
+</body>
+</html>
