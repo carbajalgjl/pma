@@ -1,0 +1,19 @@
+{% macro form_error_display(errors) %}
+    {% if errors %}
+        <div class="error">
+            <ul>
+            {% for error in errors %}
+                <li>{{ error }}</li>
+            {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+{% endmacro %}
+
+{% macro form_field_render(field) %}
+    <div class="form-group">
+        <label for="{{ field.id }}">{{ field.label }}</label>
+        <input type="{{ field.type }}" name="{{ field.name }}" id="{{ field.id }}" value="{{ field.value }}" class="form-control">
+        {{ form_error_display(field.errors) }}
+    </div>
+{% endmacro %}
