@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Project Details</title>
+    <style>
+        /* Custom styles for tabbed layout */
+        .tab-content {
+            margin-top: 15px;
+        }
+        .empty-state {
+            text-align: center;
+            margin: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Project Details</h1>
+        <ul class="nav nav-tabs" id="projectTabs">
+            <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#details">Details</a></li>
+            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#financial">Financial Summary</a></li>
+            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#edit">Edit Project</a></li>
+        </ul>
+
+        <div class="tab-content">
+            <div class="tab-pane fade show active" id="details">
+                <h2>Project Information</h2>
+                <!-- Display project details in a responsive table -->
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Field</th>
+                            <th>Value</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Project Name</td><td>{{ project.name }}</td></tr>
+                        <tr><td>Description</td><td>{{ project.description }}</td></tr>
+                        <!-- Add other project fields as necessary -->
+                    </tbody>
+                </table>
+                <div class="empty-state" style="display: {{ project.name ? 'none' : 'block' }};">
+                    <p>No project information available.</p>
+                </div>
+            </div>
+
+            <div class="tab-pane fade" id="financial">
+                <h2>Financial Summary</h2>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Item</th>
+                            <th>Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Total Budget</td><td>{{ financial.total_budget }}</td></tr>
+                        <tr><td>Spent</td><td>{{ financial.spent }}</td></tr>
+                        <tr><td>Remaining</td><td>{{ financial.remaining }}</td></tr>
+                    </tbody>
+                </table>
+                <div class="empty-state" style="display: {{ financial.total_budget ? 'none' : 'block' }};">
+                    <p>No financial data available.</p>
+                </div>
+            </div>
+
+            <div class="tab-pane fade" id="edit">
+                <h2>Edit Project</h2>
+                <!-- Authorization check for edit/delete buttons -->
+                {% if user.is_authorized %}
+                    <button class="btn btn-primary">Edit</button>
+                    <button class="btn btn-danger">Delete</button>
+                {% else %}
+                    <p>You do not have permission to edit or delete this project.</p>
+                {% endif %}
+            </div>
+        </div>
+        <button onclick="window.print();" class="btn btn-secondary">Print</button>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
