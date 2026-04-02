@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        .error { color: red; }
+        .container { width: 300px; margin: auto; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Create Account</h2>
+        <form id="registrationForm">
+            <label for="username">Username:</label><br>
+            <input type="text" id="username" name="username" required><br>
+            <span class="error" id="usernameError"></span><br>
+            <label for="password">Password:</label><br>
+            <input type="password" id="password" name="password" required><br>
+            <span class="error" id="passwordError"></span><br>
+            <label for="confirmPassword">Confirm Password:</label><br>
+            <input type="password" id="confirmPassword" name="confirmPassword" required><br>
+            <span class="error" id="confirmPasswordError"></span><br>
+            <input type="submit" value="Register">
+        </form>
+        <p>Already have an account? <a href="/login.html">Login here</a></p>
+        <p class="strong-password-requirements">Password must be at least 8 characters long, include an uppercase letter, a lowercase letter, a number, and a special character.</p>
+    </div>
+
+    <script>
+        document.getElementById('registrationForm').onsubmit = function(e) {
+            e.preventDefault(); // Prevent form submission
+            let errors = false;
+            document.getElementById('usernameError').innerText = '';
+            document.getElementById('passwordError').innerText = '';
+            document.getElementById('confirmPasswordError').innerText = '';
+
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+
+            // Username validation
+            if (username.length < 3) {
+                document.getElementById('usernameError').innerText = 'Username must be at least 3 characters long.';
+                errors = true;
+            }
+
+            // Password validation
+            const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+            if (!passwordPattern.test(password)) {
+                document.getElementById('passwordError').innerText = 'Password does not meet requirements.';
+                errors = true;
+            }
+
+            // Confirm password validation
+            if (password !== confirmPassword) {
+                document.getElementById('confirmPasswordError').innerText = 'Passwords do not match.';
+                errors = true;
+            }
+
+            if (!errors) {
+                // If there are no errors, submit the form
+                alert('Form submitted successfully!');
+                // You can add AJAX request here to send form data without refreshing the page.
+            }
+        };
+    </script>
+</body>
+</html>
