@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects</title>
+    <link rel="stylesheet" href="styles.css">
+    <script defer src="scripts.js"></script>
+</head>
+<body>
+    <h1>Project List</h1>
+    <div id="empty-state" style="display: none;">
+        <h2>No projects available</h2>
+        <p>It seems like there are no projects yet. Please add a new project to get started!</p>
+    </div>
+    <table id="projects-table">
+        <thead>
+            <tr>
+                <th>Project Name</th>
+                <th>Description</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Dynamic project rows will be inserted here -->
+        </tbody>
+    </table>
+    <div id="pagination">
+        <button id="prev-page">Previous</button>
+        <button id="next-page">Next</button>
+    </div>
+    <script>
+        const projects = []; // Fetch your projects from an API or database here
+        const tableBody = document.querySelector('#projects-table tbody');
+        const emptyState = document.getElementById('empty-state');
+
+        function renderProjects() {
+            tableBody.innerHTML = '';
+            if (projects.length === 0) {
+                emptyState.style.display = 'block';
+            } else {
+                emptyState.style.display = 'none';
+                projects.forEach(project => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${project.name}</td>
+                        <td>${project.description}</td>
+                        <td>
+                            <button onclick="editProject(${project.id})">Edit</button>
+                            <button onclick="confirmDelete(${project.id})">Delete</button>
+                        </td>
+                    `;
+                    tableBody.appendChild(row);
+                });
+            }
+        }
+
+        function confirmDelete(id) {
+            if (confirm('Are you sure you want to delete this project?')) {
+                deleteProject(id);
+            }
+        }
+
+        function editProject(id) {
+            // Logic to edit the project
+        }
+
+        function deleteProject(id) {
+            // Logic to delete the project
+            renderProjects();
+        }
+
+        // Initial render
+        renderProjects();
+    </script>
+</body>
+</html>
