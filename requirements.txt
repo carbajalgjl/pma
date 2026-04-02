@@ -1,0 +1,15 @@
+Flask
+Flask-SQLAlchemy
+Flask-Login
+Flask-WTF
+WTForms
+Flask-Bcrypt
+python-dotenv
+email-validator
+pytest
+pytest-cov
+Werkzeug
+Jinja2
+click
+itsdangerous
+MarkupSafe
